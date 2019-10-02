@@ -1,1 +1,31 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        // Create new reservations
+        $("#add-btn").on("click", function(event) {
+          event.preventDefault();
+          var newRequest = {
+            name: $("#name").val(),
+            phoneNumber: $("#phoneNumber").val(),
+            email: $("#email").val(),
+            uniqueID: $("#uniqueID").val()
+          };
+    
+          // Question: What does this code do??
+          $.post("/api/tables", newReservation)
+            .then(function(data) {
+              console.log("tables.html", data);
+              alert("Adding reservation...");
+            });
+        });
+      </script>
+</body>
+</html>
