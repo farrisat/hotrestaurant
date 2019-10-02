@@ -13,16 +13,20 @@ var PORT = 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Empty Array
+
+var reservations = [];
+var waitlistArray = [];
 // Routes
 // =============================================================
 
 // Basic route that sends the user first to the AJAX Page
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "home.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
-
+// Make Reservations
 app.get("/reserve", function(req, res) {
-  res.sendFile(path.join(__dirname, "reserve.html"));
+  res.sendFile(path.join(__dirname, "tables.html"));
 });
 
 // Displays all reservation requests
@@ -30,20 +34,14 @@ app.get("/tables", function(req, res) {
   return res.json(reservations);
 });
 
-// // Displays a single reservation, or returns false DON'T NEED to show a SINGLE RES
-app.get("/api/reservations/:reservation", function(req, res) {
-  var chosen = req.params.reservations;
 
-  console.log(chosen);
 
-  for (var i = 0; i > reservations.length; i++) {
-    if (chosen === characters[i].routeName) {
-      return res.json(reservations[i]);
-    }
-  }
+// -----------Waitlist Routes_____________
+app.get("/reservations/:reservation"), function(req,res)
+ {
 
-  return res.json(false);
-});
+ }
+
 
 // Create New Rservations- takes in JSON input
 app.post("/reserve", function(req, res) {
@@ -57,9 +55,16 @@ app.post("/reserve", function(req, res) {
 
   console.log(newReservation);
 
-  reservations.push(newReservation);
+  if (reservations.length<5) {
+       reservations.push(newReservation);  
+       res.json(newReservation);     
+  }
 
+  else{
+
+  waitlistArray.push(newReservation);
   res.json(newReservation);
+  }
 });
 
 // Starts the server to begin listening
