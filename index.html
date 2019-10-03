@@ -67,6 +67,27 @@ h1 {
       
           </div>
     <!-- Optional JavaScript -->
+    <script type="text/javascript">
+        // Create new reservations
+        $("#add-btn").on("click", function(event) {
+          event.preventDefault();
+          var newRequest = {
+            name: $("#name").val(),
+            phoneNumber: $("#phoneNumber").val(),
+            email: $("#email").val(),
+            uniqueID: $("#uniqueID").val()
+          };
+    
+          // Question: What does this code do??
+
+          $.post("/index", newReservation)
+            .then(function(data) {
+            
+              console.log("tables.html", data);
+              alert("Adding reservation...");
+            });
+        });
+      </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
